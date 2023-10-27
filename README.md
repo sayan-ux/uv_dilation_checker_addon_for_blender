@@ -1,4 +1,4 @@
-# uv_dilation_checker-addon-for-blender
+# uv_dilation_checker_addon_for_blender
 
 Checks for UV Dilation in Blender
 
