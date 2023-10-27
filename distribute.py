@@ -31,7 +31,7 @@ shutil.rmtree(deps_dir)
 print(f"Deleted the 'deps' folder")
 
 # Step 6: Zip the folder
-output_zip = "uv_dialation_checker.zip"
+output_zip = "uv_dilation_checker.zip"
 with zipfile.ZipFile(output_zip, 'w', zipfile.ZIP_DEFLATED) as zipf:
     for foldername, subfolders, filenames in os.walk(build_dir):
         for filename in filenames:
