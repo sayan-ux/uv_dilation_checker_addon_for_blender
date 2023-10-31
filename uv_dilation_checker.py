@@ -13,6 +13,7 @@ from bpy.props import EnumProperty, IntProperty
 import tempfile
 import os
 import sys
+import time
 
 
 
@@ -50,7 +51,13 @@ class UV_OT_GenerateImage(Operator):
 
         return {'FINISHED'}
 
+def cv_to_bpy_image(cv_img, name):
+    height, width, _channel = cv_img.shape
+    bpy_image = bpy.data.images.new(name, width=width, height=height)
+    bpy_image.pixels = np.flipud(cv_img.flatten())
+    bpy_image.update()
 
+    return bpy_image
 def generator(resolution, strokesize):
     
     tmpdir = tempfile.gettempdir()
@@ -82,15 +89,18 @@ def generator(resolution, strokesize):
 
     result = cv2.add(image1, strokedimage)
 
-    cv2.imwrite(filepath, result)
+    time_start = time.perf_counter()
+    #cv2.imwrite(filepath, result)
 
-    image2 = cv2.imread(filepath, cv2.IMREAD_UNCHANGED)
-    result = image2.copy()
-    mask = (image2[:, :, 3] == 0)
+    #image2 = cv2.imread(filepath, cv2.IMREAD_UNCHANGED)
+    
+    mask = (result[:, :, 3] == 0)
     result[mask] = [255, 255, 255, 255]
     cv2.imwrite(filepath, result)
 
-    bpy.ops.image.open(filepath=filepath, directory=tmpdir, files=[{"name":imagename, "name":imagename}], relative_path=True, show_multiview=False)
+    bpy.ops.image.open(filepath=filepath, directory=tmpdir, files=[{"name":imagename}], relative_path=True, show_multiview=False)
+    
+    print(f'Took {time.perf_counter() - time_start:.3f} seconds')
     image = bpy.data.images[imagename]
 
     uveditorfound = False
