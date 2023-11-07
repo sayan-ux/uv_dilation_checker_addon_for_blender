@@ -88,19 +88,13 @@ def generator(resolution, strokesize):
         strokedimage[:, :, c] = strokecolor[c]
 
     result = cv2.add(image1, strokedimage)
-
-    time_start = time.perf_counter()
-    #cv2.imwrite(filepath, result)
-
-    #image2 = cv2.imread(filepath, cv2.IMREAD_UNCHANGED)
     
     mask = (result[:, :, 3] == 0)
     result[mask] = [255, 255, 255, 255]
     cv2.imwrite(filepath, result)
 
     bpy.ops.image.open(filepath=filepath, directory=tmpdir, files=[{"name":imagename}], relative_path=True, show_multiview=False)
-    
-    print(f'Took {time.perf_counter() - time_start:.3f} seconds')
+
     image = bpy.data.images[imagename]
 
     uveditorfound = False
