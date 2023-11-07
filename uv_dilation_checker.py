@@ -13,9 +13,6 @@ from bpy.props import EnumProperty, IntProperty
 import tempfile
 import os
 import sys
-import time
-
-
 
 sys.path.append(os.path.dirname(__file__))
 
