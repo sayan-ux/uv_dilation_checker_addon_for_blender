@@ -1,7 +1,7 @@
 bl_info = {
     "name": "UV Dilation Checker",
     "author": "Sayan Sikdar",
-    "version": (1, 2),
+    "version": (1, 1),
     "blender": (2, 80, 0),
     "description": "check diation for uv",
     "category": "UV"
@@ -26,6 +26,11 @@ class UVEditorPanel(Panel):
     bl_region_type = 'UI'
     bl_category = "UV dilation checker"
     
+    @classmethod
+    def poll(cls, context):
+        return context.mode == 'EDIT_MESH'
+
+
     def draw(self, context):
         layout = self.layout
         uv_editor = context.space_data
