@@ -1,7 +1,7 @@
 bl_info = {
     "name": "UV Dilation Checker",
     "author": "Sayan Sikdar",
-    "version": (1, 1),
+    "version": (1, 2),
     "blender": (2, 80, 0),
     "description": "check diation for uv",
     "category": "UV"
