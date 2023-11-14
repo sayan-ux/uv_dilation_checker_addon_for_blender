@@ -111,6 +111,10 @@ def register():
     bpy.types.Scene.uv_resolution_option = EnumProperty(
         name="Resolution",
         items=[
+            ('32', "32", "32 Resolution"),
+            ('64', "64", "64 Resolution"),
+            ('128', "128", "128 Resolution"),
+            ('256', "256", "256 Resolution"),
             ('512', "512", "512 Resolution"),
             ('1024', "1024", "1K Resolution"),
             ('2048', "2048", "2K Resolution"),
